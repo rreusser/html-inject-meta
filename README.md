@@ -11,10 +11,10 @@
 
 ## Example
 
-To install
+*Not yet published to npm*. When published,
 
 ```
-$ npm i -g metadataify
+$ # npm i -g metadataify 
 ```
 
 To use:
