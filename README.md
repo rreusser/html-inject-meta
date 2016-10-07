@@ -9,6 +9,10 @@
 <!--[![Semistandard Style][semistandard-image]][semistandard-url]-->
 
 
+## Introduction
+
+See: [indexhtmlify#5](https://github.com/dominictarr/indexhtmlify/issues/5)
+
 ## Example
 
 *Not yet published to npm*. When published,
