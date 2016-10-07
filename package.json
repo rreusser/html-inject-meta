@@ -1,0 +1,47 @@
+{
+  "name": "metadataify",
+  "version": "1.0.0",
+  "description": "Stream meta tags into html",
+  "main": "metadataify.js",
+  "bin": "cli.js",
+  "author": {
+    "name": "Ricky Reusser",
+    "email": "rsreusser@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Ricky Reusser",
+      "email": "rsreusser@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rreusser/metadataify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rreusser/metadataify/issues",
+    "email": "rsreusser@gmail.com"
+  },
+  "scripts": {
+    "lint": "npm run semistandard",
+    "test": "npm run lint && mocha"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.0"
+  },
+  "dependencies": {
+    "entities": "^1.1.1",
+    "hyperstream": "^1.2.2",
+    "minimist": "^1.2.0"
+  },
+  "semistandard": {
+    "globals": [
+      "describe",
+      "it",
+      "beforeEach"
+    ]
+  }
+}
