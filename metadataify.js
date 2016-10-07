@@ -49,6 +49,8 @@ function extractInputData (output, data) {
 function extractMetadataifyData (output, data) {
   if (!data) return;
 
+  extractInputData(output, data);
+
   var url = data.url;
   var image = data.image;
 

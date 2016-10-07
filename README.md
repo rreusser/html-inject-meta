@@ -44,6 +44,8 @@ Used without any arguments, it looks for the nearest `package.json` and uses the
 </html>
 ```
 
+Since it's not straightforward to specify all fields (the image, for example) in the built-in `package.json` fields, you may specify a `metadataify` block with values that will override the defaults.
+
 Note that this script *only* works on valid html files, which means that a `<title>` element must exist for the value to be set, and a `<head>` tag must exist for meta tags to be appended.
 
 ## License
