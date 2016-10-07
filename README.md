@@ -52,7 +52,7 @@ $ cat index.html | metadataify --no-input --title="My page!"
 1. from input data (default = nearest `package.json`) using basic rules (e.g. `description` -> `twitter:description`)
 2. from `metadataify` field of input data using same basic rules as 1.
 3. from `metadataify` field of input data using specific rules (e.g. `{metadataify: {twitter: {title: "..."}}`)
-4. from command line override flags (e.g. `--title="...". Works for `title`, `description`, `author`, and `url`)
+4. from command line override flags (e.g. `--title="..."`. Works for `title`, `description`, `author`, and `url`)
 
 Applying this to a minimal html file using the `package.json` for this repo yields:
 
