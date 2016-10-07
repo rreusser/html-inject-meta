@@ -13,7 +13,7 @@
 
 See: [indexhtmlify#5](https://github.com/dominictarr/indexhtmlify/issues/5)
 
-## Example
+## Examples
 
 *Not yet published to npm*. When published,
 
@@ -21,7 +21,7 @@ See: [indexhtmlify#5](https://github.com/dominictarr/indexhtmlify/issues/5)
 $ npm i -g metadataify 
 ```
 
-To use:
+To let it use data from the nearest `package.json` file:
 
 ```bash
 $ cat index.html | metadataify
@@ -32,6 +32,20 @@ Or even better:
 ```bash
 $ browserify index.js | indexhtmlify | metadataify > index.html
 ```
+
+If you have your own json input:
+
+```bash
+$ cat index.html | metadataify --input=mydata.json
+```
+
+And if you're a fan of command line args (`--no-input` flag not yet implemented):
+
+```bash
+$ cat index.html | metadataify --no-input --title="My page!"
+```
+
+## Usage
 
 `metadataify` is designed to just work without much configuration, but also to allow increasingly precise overrides when necessary. Used without any arguments, it looks for the nearest `package.json` and uses the following rules (in _increasing_ order of precedence) to determine the metadata:
 
