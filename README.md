@@ -18,7 +18,7 @@ See: [indexhtmlify#5](https://github.com/dominictarr/indexhtmlify/issues/5)
 *Not yet published to npm*. When published,
 
 ```
-$ # npm i -g metadataify 
+$ npm i -g metadataify 
 ```
 
 To use:
@@ -27,7 +27,20 @@ To use:
 $ cat index.html | metadataify
 ```
 
-Used without any arguments, it looks for the nearest `package.json` and uses the available fields to fill in the details. This yields the output:
+Or even better:
+
+```bash
+$ browserify index.js | indexhtmlify | metadataify > index.html
+```
+
+`metadataify` is designed to just work without much configuration, but also to allow increasingly precise overrides when necessary. Used without any arguments, it looks for the nearest `package.json` and uses the following rules (in _increasing_ order of precedence) to determine the metadata:
+
+1. from input data (default = nearest `package.json`) using basic rules (e.g. `description` -> `twitter:description`)
+2. from `metadataify` field of input data using same basic rules as 1.
+3. from `metadataify` field of input data using specific rules (e.g. `{metadataify: {twitter: {title: "..."}}`)
+4. from command line override flags (e.g. `--title="...". Works for `title`, `description`, `author`, and `url`)
+
+Applying this to a minimal html file using the `package.json` for this repo yields:
 
 ```html
 <!DOCTYPE html>
@@ -38,15 +51,21 @@ Used without any arguments, it looks for the nearest `package.json` and uses the
     <meta charset=utf-8><meta name="application-name" content="metadataify">
     <meta name="subject" content="Stream meta tags into html">
     <meta name="abstract" content="Stream meta tags into html">
+    <meta name="twitter:title" content="metadataify">
+    <meta name="description" content="Stream meta tags into html">
+    <meta name="twitter:description" content="Stream meta tags into html">
+    <meta name="author" content="Ricky Reusser">
     ...
   </head>
   <body></body>
 </html>
 ```
 
-Since it's not straightforward to specify all fields (the image, for example) in the built-in `package.json` fields, you may specify a `metadataify` block with values that will override the defaults.
+_Note that this script *only* works on valid html files, which means that a `<title>` element must exist for the value to be set, and a `<head>` tag must exist for meta tags to be appended._
 
-Note that this script *only* works on valid html files, which means that a `<title>` element must exist for the value to be set, and a `<head>` tag must exist for meta tags to be appended.
+## See also
+
+This module is heaviliy inspired by and may be used effectively with [indexhtmlify](https://github.com/dominictarr/indexhtmlify).
 
 ## License
 
