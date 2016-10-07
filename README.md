@@ -24,9 +24,24 @@ $ # npm i -g metadataify
 To use:
 
 ```bash
-$ cat index.html | metadataify --title "a title" \
-    --meta-name og:image="..." \
-    --meta-name description="a description"
+$ cat index.html | metadataify
+```
+
+Used without any arguments, it looks for the nearest `package.json` and uses the available fields to fill in the details. This yields the output:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>metadataify</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta charset=utf-8><meta name="application-name" content="metadataify">
+    <meta name="subject" content="Stream meta tags into html">
+    <meta name="abstract" content="Stream meta tags into html">
+    ...
+  </head>
+  <body></body>
+</html>
 ```
 
 Note that this script *only* works on valid html files, which means that a `<title>` element must exist for the value to be set, and a `<head>` tag must exist for meta tags to be appended.

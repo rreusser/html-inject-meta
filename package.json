@@ -35,7 +35,8 @@
   "dependencies": {
     "entities": "^1.1.1",
     "hyperstream": "^1.2.2",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "pkg-up": "^1.0.0"
   },
   "semistandard": {
     "globals": [
@@ -43,5 +44,16 @@
       "it",
       "beforeEach"
     ]
+  },
+  "metadataify": {
+    "url": "http://github.com/rreusser/metadataify",
+    "image": "http://example.com/example.gif",
+    "twitter": {
+      "title": "Title for Twitter",
+      "description": "Description for Twitter",
+      "image": "http://example.com/image-for-twitter.gif",
+      "url": "http://example.com/url-for-twitter/",
+      "card": "summary_large_image"
+    }
   }
 }
