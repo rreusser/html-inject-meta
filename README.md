@@ -36,7 +36,20 @@ Given `package.json`:
 }
 ```
 
-and given a minimal html input, it produces the output:
+and given a minimal html input
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>-</title>
+  </head>
+  <body>
+  </body>
+</html>
+```
+
+it produces the output:
 
 ```html
 <!doctype html>
