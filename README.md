@@ -10,7 +10,7 @@
 
 ## Introduction
 
-See: [indexhtmlify#5](https://github.com/dominictarr/indexhtmlify/issues/5)
+Add metadata tags to a stream of html so that it looks all pretty when you share a demo or a simple web example on social media. See: [indexhtmlify#5](https://github.com/dominictarr/indexhtmlify/issues/5).
 
 ## Installation
 
@@ -20,7 +20,7 @@ $ npm i -g metadataify
 
 ## Usage
 
-`metadataify` is designed to just work without much configuration, but allows overrides when necessary. The input _must_ be valid html containing `head` and `title` tags. Insertion of the `meta` tags is _not_ idempotent. Used without any arguments, it looks for the nearest `package.json`.
+`metadataify` is designed to just work without much configuration, but allows overrides when necessary. The input _must_ be valid html containing `head` and `title` tags. Insertion of the `meta` tags is _not_ idempotent. Used without any arguments, the command line version looks for the nearest `package.json`. For example:
 
 ```bash
 $ metadataify < input.html
@@ -36,7 +36,7 @@ Given `package.json`:
 }
 ```
 
-Given a minimal html input, it produces the output:
+and given a minimal html input, it produces the output:
 
 ```html
 <!doctype html>
@@ -79,6 +79,12 @@ You can disable json input with `--no-input` and instead specify fields on the c
 ```bash
 $ metadataify --no-input --title="My page!" --description="A description..." --author="My Name" < input.html
 ```
+
+## API
+
+#### `require('metadataify')([data])`
+
+Returns a transform stream that applies to a stream of html the changes specified in `data`. The format of `data` identically matches the format of `package.json` that is read by the command line version, including the optional `metadataify` field.
 
 ## See also
 
