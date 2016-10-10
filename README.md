@@ -80,6 +80,8 @@ You can disable json input with `--no-input` and instead specify fields on the c
 $ metadataify --no-input --title="My page!" --description="A description..." --author="My Name" < input.html
 ```
 
+If you need further customization or more specificity, look in the code to see the precise logic. PRs with improvements are welcome!
+
 ## API
 
 #### `require('metadataify')([data])`
