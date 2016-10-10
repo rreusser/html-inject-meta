@@ -24,13 +24,16 @@
     "email": "rsreusser@gmail.com"
   },
   "scripts": {
-    "lint": "npm run semistandard",
+    "lint": "semistandard",
+    "lint-fix": "semistandard --fix",
     "test": "npm run lint && mocha"
   },
   "keywords": [],
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.1.0"
+    "mocha": "^3.1.0",
+    "semistandard": "^9.0.0",
+    "stream-to-string": "^1.1.0"
   },
   "dependencies": {
     "entities": "^1.1.1",

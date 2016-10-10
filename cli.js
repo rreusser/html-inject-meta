@@ -2,64 +2,84 @@
 
 'use strict';
 
-var minimist = require('minimist');
 var metadataify = require('./metadataify');
+var minimist = require('minimist');
 var pkgUp = require('pkg-up');
 var fs = require('fs');
 
-if(process.stdin.isTTY) {
-  process.exit(1)
+if (process.stdin.isTTY) {
+  printUsageAndExit();
 }
 
 var opts = minimist(process.argv.slice(2));
 
+function printUsageAndExit () {
+  console.error('USAGE: browserify client.js |indexhtmlify | metadataify > index.html');
+  process.exit(1);
+}
+
 function execute (data) {
   process.stdin
     .pipe(metadataify(data))
-    .pipe(process.stdout)
+    .pipe(process.stdout);
 }
 
-function applyOverrides(data, opts) {
+function applyOverrides (data, opts) {
   data.metadataify = data.metadataify || {};
 
-  if (typeof opts.description === 'string') {
-    data.metadataify.description = opts.description;
+  function setField (inField, outField) {
+    if (!outField) {
+      outField = inField;
+    }
+
+    var value = opts[inField];
+
+    if (typeof value !== 'string') {
+      return;
+    }
+
+    data.metadataify[outField] = value;
   }
-  if (typeof opts.title === 'string') {
-    data.metadataify.name = opts.title;
-  }
-  if (typeof opts.author === 'string') {
-    data.metadataify.author = opts.author;
-  }
-  if (typeof opts.url === 'string') {
-    data.metadataify.url = opts.url;
-  }
+
+  setField('description');
+  setField('title', 'name');
+  setField('author');
+  setField('url');
 
   return data;
 }
 
+function processFile (err, data) {
+  var parsedData;
+
+  if (err) {
+    console.error(err);
+    printUsageAndExit();
+  }
+
+  try {
+    parsedData = JSON.parse(data);
+  } catch (e) {
+    console.error(e);
+    printUsageAndExit();
+  }
+
+  execute(applyOverrides(parsedData, opts));
+}
+
 if (opts.input) {
-  fs.readFile(opts.input, function(err, data) {
-    if (err) {
-      throw new Error(err);
-    }
-
-    var data = applyOverrides(JSON.parse(data), opts);
-
-    execute(data);
-  });
+  // input is specified:
+  fs.readFile(opts.input, processFile);
+} else if (opts.input === false) {
+  // --no-input flag was deliberately passed:
+  execute(applyOverrides({}, opts));
 } else {
-  pkgUp().then(function(filepath) {
-    if (filepath) {
-      fs.readFile(filepath, function(err, data) {
-        if (err) {
-          throw new Error(err);
-        }
-
-        var pkg = applyOverrides(JSON.parse(data), opts);
-
-        execute(pkg);
-      });
+  // input is not specified:
+  pkgUp().then(function (filepath) {
+    if (!filepath) {
+      printUsageAndExit();
     }
+
+    fs.readFile(filepath, processFile);
   });
 }

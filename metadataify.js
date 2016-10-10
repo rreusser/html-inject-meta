@@ -56,7 +56,7 @@ function extractMetadataifyData (output, data) {
 
   if (typeof url === 'string') {
     output.name['url'] = url;
-    output.link.relCanonical = url;
+    output.canonicalUrl = url;
     output.property['og:url'] = url;
     output.name['twitter:url'] = url;
   }
@@ -77,6 +77,10 @@ function extractMetadataifyData (output, data) {
         output.name['twitter:' + field] = data.twitter[field];
       }
     }
+  }
+
+  if (typeof data.canonicalUrl === 'string') {
+    output.canonicalUrl = data.canonicalUrl;
   }
 }
 
@@ -103,8 +107,8 @@ function fieldsToChanges (fields) {
     }
   }
 
-  if (fields.link && fields.link.relCanonical) {
-    metaTagsContent += '<link rel="canonical" href="' + entities(fields.link.relCanonical) + '">\n';
+  if (fields.canonicalUrl) {
+    metaTagsContent += '<link rel="canonical" href="' + entities(fields.canonicalUrl) + '">\n';
   }
 
   if (metaTagsContent.length > 0) {
@@ -117,15 +121,10 @@ function fieldsToChanges (fields) {
 function metadataify (data) {
   data = data || {};
 
-  var fields = {
-    name: {},
-    property: {},
-    itemprop: {},
-    link: {}
-  };
+  var fields = {name: {}, property: {}, itemprop: {}, link: {}};
 
   extractInputData(fields, data);
-  extractMetadataifyData(fields, data.metadataify)
+  extractMetadataifyData(fields, data.metadataify);
 
   return hyperstream(fieldsToChanges(fields));
 }

@@ -3,83 +3,86 @@
 > Stream meta tags into html
 
 [![experimental][stability-experimental]][stability-url]
-<!--[![Build Status][travis-image]][travis-url]-->
-<!--[![npm version][npm-image]][npm-url]-->
-<!--[![Dependency Status][david-dm-image]][david-dm-url]-->
-<!--[![Semistandard Style][semistandard-image]][semistandard-url]-->
-
+[![Build Status][travis-image]][travis-url]
+[![npm version][npm-image]][npm-url]
+[![Dependency Status][david-dm-image]][david-dm-url]
+[![Semistandard Style][semistandard-image]][semistandard-url]
 
 ## Introduction
 
 See: [indexhtmlify#5](https://github.com/dominictarr/indexhtmlify/issues/5)
 
-## Examples
-
-*Not yet published to npm*. When published,
+## Installation
 
 ```
 $ npm i -g metadataify 
 ```
 
-To let it use data from the nearest `package.json` file:
-
-```bash
-$ cat index.html | metadataify
-```
-
-Or even better:
-
-```bash
-$ browserify index.js | indexhtmlify | metadataify > index.html
-```
-
-If you have your own json input:
-
-```bash
-$ cat index.html | metadataify --input=mydata.json
-```
-
-And if you're a fan of command line args (`--no-input` flag not yet implemented):
-
-```bash
-$ cat index.html | metadataify --no-input --title="My page!"
-```
-
 ## Usage
 
-`metadataify` is designed to just work without much configuration, but also to allow increasingly precise overrides when necessary. Used without any arguments, it looks for the nearest `package.json` and uses the following rules (in _increasing_ order of precedence) to determine the metadata:
+`metadataify` is designed to just work without much configuration, but allows overrides when necessary. The input _must_ be valid html containing `head` and `title` tags. Insertion of the `meta` tags is _not_ idempotent. Used without any arguments, it looks for the nearest `package.json`.
 
-1. from input data (default = nearest `package.json`) using basic rules (e.g. `description` -> `twitter:description`)
-2. from `metadataify` field of input data using same basic rules as 1.
-3. from `metadataify` field of input data using specific rules (e.g. `{metadataify: {twitter: {title: "..."}}`)
-4. from command line override flags (e.g. `--title="..."`. Works for `title`, `description`, `author`, and `url`)
+```bash
+$ metadataify < input.html
+```
 
-Applying this to a minimal html file using the `package.json` for this repo yields:
+Given `package.json`:
+
+```json
+{
+  "name": "metadataify",
+  "description": "Stream meta tags into html",
+  "author": "Ricky Reusser"
+}
+```
+
+Given a minimal html input, it produces the output:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <title>metadataify</title>
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-    <meta charset=utf-8><meta name="application-name" content="metadataify">
+    <meta name="application-name" content="metadataify">
     <meta name="subject" content="Stream meta tags into html">
     <meta name="abstract" content="Stream meta tags into html">
     <meta name="twitter:title" content="metadataify">
     <meta name="description" content="Stream meta tags into html">
     <meta name="twitter:description" content="Stream meta tags into html">
     <meta name="author" content="Ricky Reusser">
-    ...
+    <meta name="twitter:creator" content="Ricky Reusser">
+    <meta itemprop="title" content="metadataify">
+    <meta itemprop="description" content="Stream meta tags into html">
+    <meta property="og:title" content="metadataify">
+    <meta property="og:description" content="Stream meta tags into html">
+    <meta property="article:author" content="Ricky Reusser">
   </head>
-  <body></body>
+  <body>
+  </body>
 </html>
 ```
 
-_Note that this script *only* works on valid html files, which means that a `<title>` element must exist for the value to be set, and a `<head>` tag must exist for meta tags to be appended._
+Even better, use it with [indexhtmlify](https://github.com/dominictarr/indexhtmlify):
+
+```bash
+$ browserify index.js | indexhtmlify | metadataify > index.html
+```
+
+To override the nearest `package.json` with your own input JSON:
+
+```bash
+$ metadataify --input=mydata.json < input.html
+```
+
+You can disable json input with `--no-input` and instead specify fields on the command line:
+
+```bash
+$ metadataify --no-input --title="My page!" --description="A description..." --author="My Name" < input.html
+```
 
 ## See also
 
-This module is heaviliy inspired by and may be used effectively with [indexhtmlify](https://github.com/dominictarr/indexhtmlify).
+This module is heaviliy inspired by and works great with [indexhtmlify](https://github.com/dominictarr/indexhtmlify).
 
 ## License
 
