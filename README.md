@@ -90,7 +90,7 @@ Returns a transform stream that applies to a stream of html the changes specifie
 
 ## See also
 
-This module is heaviliy inspired by and works great with [indexhtmlify](https://github.com/dominictarr/indexhtmlify).
+This module is heaviliy inspired by and works great with [indexhtmlify](https://github.com/dominictarr/indexhtmlify). Many thanks to [Dima Yv](https://github.com/dfcreative) for the initial inspiration.
 
 ## License
 
