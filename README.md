@@ -2,7 +2,7 @@
 
 > Stream meta tags into html
 
-[![experimental][stability-unstable]][stability-url]
+[![unstable][stability-unstable]][stability-url]
 [![Build Status][travis-image]][travis-url]
 [![npm version][npm-image]][npm-url]
 [![Dependency Status][david-dm-image]][david-dm-url]
