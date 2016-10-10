@@ -10,7 +10,7 @@
 
 ## Introduction
 
-Add metadata tags to a stream of html so that it looks all pretty when you share a demo or a simple web example on social media. See: [indexhtmlify#5](https://github.com/dominictarr/indexhtmlify/issues/5).
+Add metadata tags to a stream of html so that it looks pretty when you share it. See: [indexhtmlify#5](https://github.com/dominictarr/indexhtmlify/issues/5).
 
 ## Installation
 
