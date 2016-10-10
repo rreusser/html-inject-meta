@@ -75,6 +75,23 @@ it produces the output:
 </html>
 ```
 
+If you don't want to pollute your `package.json` with metadata for sharing, you can override the defaults by adding a `metadataify` field to your `package.json`, e.g:
+
+```json
+{
+  "name": "metadataify",
+  "description": "My npm package description",
+  "author": "Ricky Reusser",
+  "metadataify": {
+    "name": "My metadataify demo",
+    "description": "Here's a neat demo",
+    "url": "http://metadataify.github.io",
+    "author": "Ricky Reusser",
+    "image": "http://rawgit.com/rreusser/metadataify/master/images/screenshot.png"
+  }
+}
+```
+
 Even better, use it with [indexhtmlify](https://github.com/dominictarr/indexhtmlify):
 
 ```bash
