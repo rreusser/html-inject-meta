@@ -124,5 +124,10 @@ function metadataify (data) {
   extractInputData(fields, data);
   extractMetadataifyData(fields, data.metadataify);
 
+  // Set a twitter card type if there's at *least* a title or a desription:
+  if ((fields.name['twitter:title'] || fields.name['twitter:description']) && typeof fields.name['twitter:card'] !== 'string') {
+    fields.name['twitter:card'] = 'summary';
+  }
+
   return hyperstream(fieldsToChanges(fields));
 }
