@@ -86,7 +86,7 @@ function fieldsToChanges (fields) {
   var changes = {};
 
   if (fields.title) {
-    changes.title = {_text: entities(fields.title)};
+    changes.title = {_text: fields.title};
   }
 
   var metaTagsContent = '';
