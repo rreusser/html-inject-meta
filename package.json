@@ -36,7 +36,6 @@
     "stream-to-string": "^1.1.0"
   },
   "dependencies": {
-    "entities": "^1.1.1",
     "hyperstream": "^1.2.2",
     "minimist": "^1.2.0",
     "pkg-up": "^1.0.0"

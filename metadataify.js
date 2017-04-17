@@ -1,7 +1,6 @@
 'use strict';
 
 var hyperstream = require('hyperstream');
-var entities = require('entities').encodeHTML;
 
 module.exports = metadataify;
 
@@ -103,15 +102,15 @@ function fieldsToChanges (fields) {
 
     var names = Object.keys(props);
     for (var j = 0; j < names.length; j++) {
-      var name = entities(names[j]).replace('&colon;', ':');
-      var value = entities(props[name]);
+      var name = crappilyEscapedEntities(names[j]).replace('&colon;', ':');
+      var value = crappilyEscapedEntities(props[name]);
 
       metaTagsContent += '<meta ' + metaprop + '="' + name + '" content="' + value + '">\n';
     }
   }
 
   if (fields.canonicalUrl) {
-    metaTagsContent += '<link rel="canonical" href="' + entities(fields.canonicalUrl) + '">\n';
+    metaTagsContent += '<link rel="canonical" href="' + crappilyEscapedEntities(fields.canonicalUrl) + '">\n';
   }
 
   if (metaTagsContent.length > 0) {
