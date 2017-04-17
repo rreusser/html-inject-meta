@@ -1,6 +1,6 @@
 {
   "name": "metadataify",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Stream meta tags into html",
   "main": "metadataify.js",
   "bin": "cli.js",
