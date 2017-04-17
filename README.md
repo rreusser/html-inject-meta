@@ -12,6 +12,8 @@
 
 Add metadata tags to a stream of html so that it looks pretty when you share it. See: [indexhtmlify#5](https://github.com/dominictarr/indexhtmlify/issues/5).
 
+***NB: My only use-case for this module is for building my own static pages. I've tried to reasonably escape entities so that scrapers handle the meta tags well. Escaping via the [entities](https://www.npmjs.com/package/entities) module is too strong so that entities show up in the scraped data. Instead I've escaped `&amp;`, `&quot;`, `&lt;` and `&gt;`. That should provide basic sanitization, but you should exercise caution if passing end-user data through to a publicly distributed page. I'm not willing to assert that malicious injection is absolutely impossible. Please don't hesitate to file an issue or PR with any issues or concerns.***
+
 ## Installation
 
 ```
@@ -64,8 +66,6 @@ it produces the output:
     <meta name="twitter:description" content="Stream meta tags into html">
     <meta name="author" content="Ricky Reusser">
     <meta name="twitter:creator" content="Ricky Reusser">
-    <meta itemprop="title" content="metadataify">
-    <meta itemprop="description" content="Stream meta tags into html">
     <meta property="og:title" content="metadataify">
     <meta property="og:description" content="Stream meta tags into html">
     <meta property="article:author" content="Ricky Reusser">
