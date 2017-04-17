@@ -47,7 +47,7 @@ describe('metadataify', function () {
 
   it('inserts a title with html entities', function (done) {
     compare('input/test.html', 'output/insert-title-with-entities.html', {
-      name: 'test > title'
+      name: '"test > title"'
     }).then(done, done);
   });
 

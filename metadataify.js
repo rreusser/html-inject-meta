@@ -5,6 +5,14 @@ var entities = require('entities').encodeHTML;
 
 module.exports = metadataify;
 
+function crappilyEscapedEntities (str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+}
+
 function extractInputData (output, data) {
   var description = data.description;
   var title = data.name;
@@ -25,7 +33,6 @@ function extractInputData (output, data) {
     output.name.abstract = title;
     output.property['og:title'] = title;
     output.name['twitter:title'] = title;
-    output.itemprop.title = title;
   }
 
   if (description) {
@@ -34,7 +41,6 @@ function extractInputData (output, data) {
     output.name.abstract = description;
     output.property['og:description'] = description;
     output.name['twitter:description'] = description;
-    output.itemprop.description = description;
   }
 
   if (author) {
@@ -62,7 +68,6 @@ function extractMetadataifyData (output, data) {
   if (typeof image === 'string') {
     output.property['og:image'] = image;
     output.name['twitter:image'] = image;
-    output.itemprop['image'] = image;
     output.name['twitter:card'] = 'summary_large_image';
   }
 
@@ -86,12 +91,12 @@ function fieldsToChanges (fields) {
   var changes = {};
 
   if (fields.title) {
-    changes.title = {_text: fields.title};
-  }
+    changes.title = {_html: crappilyEscapedEntities(fields.title)};
+ }
 
   var metaTagsContent = '';
 
-  var metaprops = ['name', 'itemprop', 'property'];
+  var metaprops = ['name', 'property'];
   for (var i = 0; i < metaprops.length; i++) {
     var metaprop = metaprops[i];
     var props = fields[metaprop];
@@ -119,7 +124,7 @@ function fieldsToChanges (fields) {
 function metadataify (data) {
   data = data || {};
 
-  var fields = {name: {}, property: {}, itemprop: {}, link: {}};
+  var fields = {name: {}, property: {}, link: {}};
 
   extractInputData(fields, data);
   extractMetadataifyData(fields, data.metadataify);
