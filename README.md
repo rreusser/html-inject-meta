@@ -129,7 +129,7 @@ This module is heaviliy inspired by and works great with [indexhtmlify](https://
 <!-- BADGES -->
 
 [travis-image]: https://travis-ci.org/rreusser/metadataify.svg?branch=master
-[travis-url]: https://travis-ci.org//metadataify
+[travis-url]: https://travis-ci.org/rreusser/metadataify
 
 [npm-image]: https://badge.fury.io/js/metadataify.svg
 [npm-url]: https://npmjs.org/package/metadataify
