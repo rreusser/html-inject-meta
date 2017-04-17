@@ -10,7 +10,7 @@ function crappilyEscapedEntities (str) {
     .replace(/&/g, '&amp;')
     .replace(/"/g, '&quot;')
     .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
+    .replace(/>/g, '&gt;');
 }
 
 function extractInputData (output, data) {
@@ -92,7 +92,7 @@ function fieldsToChanges (fields) {
 
   if (fields.title) {
     changes.title = {_html: crappilyEscapedEntities(fields.title)};
- }
+  }
 
   var metaTagsContent = '';
 
