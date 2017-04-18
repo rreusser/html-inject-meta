@@ -17,7 +17,7 @@ Add metadata tags to a stream of html so that it looks pretty when you share it.
 ## Installation
 
 ```
-$ npm i -g metadataify 
+$ npm i metadataify 
 ```
 
 ## Usage
