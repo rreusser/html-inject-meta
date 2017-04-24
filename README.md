@@ -12,12 +12,10 @@
 
 Add metadata tags to a stream of html so that it looks pretty when you share it. See: [indexhtmlify#5](https://github.com/dominictarr/indexhtmlify/issues/5).
 
-***NB: My only use-case for this module is for building my own static pages. I've tried to reasonably escape entities so that scrapers handle the meta tags well. Escaping via the [entities](https://www.npmjs.com/package/entities) module is too strong so that entities show up in the scraped data. Instead I've escaped `&amp;`, `&quot;`, `&lt;` and `&gt;`. That should provide basic sanitization, but you should exercise caution if passing end-user data through to a publicly distributed page. I'm not willing to assert that malicious injection is absolutely impossible. Please don't hesitate to file an issue or PR with any issues or concerns.***
-
 ## Installation
 
 ```
-$ npm i -g html-inject-meta 
+$ npm i html-inject-meta 
 ```
 
 ## Usage
@@ -117,6 +115,8 @@ If you need further customization or more specificity, look in the code to see t
 #### `require('html-inject-meta')([data])`
 
 Returns a transform stream that applies to a stream of html the changes specified in `data`. The format of `data` identically matches the format of `package.json` that is read by the command line version, including the optional `html-inject-meta` field.
+
+***NB: My only use-case for this module is for building static pages. I've done my best to escape entities so that scrapers handle the meta tags well. Escaping via the [entities](https://www.npmjs.com/package/entities) module is too strong so that entities show up in the scraped data. Instead I've escaped `&amp;`, `&quot;`, `&lt;` and `&gt;` which should provide basic sanitization, but you should exercise caution if passing end-user data through to a publicly distributed page. I'm not willing to assert that malicious injection is absolutely impossible. But realistically it seems fine to me and not like the intended use case anyway. I mean why would you construct your own malicious package.json? I just feel like it's important to be transparent about this. Please don't hesitate to file an issue or PR with any issues or concerns.***
 
 ## See also
 
