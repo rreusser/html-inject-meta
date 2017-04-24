@@ -2,7 +2,7 @@
 
 var hyperstream = require('hyperstream');
 
-module.exports = metadataify;
+module.exports = htmlInjectMeta;
 
 function crappilyEscapedEntities (str) {
   return str
@@ -120,13 +120,13 @@ function fieldsToChanges (fields) {
   return changes;
 }
 
-function metadataify (data) {
+function htmlInjectMeta (data) {
   data = data || {};
 
   var fields = {name: {}, property: {}, link: {}};
 
   extractInputData(fields, data);
-  extractMetadataifyData(fields, data.metadataify);
+  extractMetadataifyData(fields, data['html-inject-meta']);
 
   // Set a twitter card type if there's at *least* a title or a desription:
   if ((fields.name['twitter:title'] || fields.name['twitter:description']) && typeof fields.name['twitter:card'] !== 'string') {

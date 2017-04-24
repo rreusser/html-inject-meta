@@ -1,4 +1,4 @@
-# metadataify
+# html-inject-meta
 
 > Stream meta tags into html
 
@@ -17,22 +17,22 @@ Add metadata tags to a stream of html so that it looks pretty when you share it.
 ## Installation
 
 ```
-$ npm i -g metadataify 
+$ npm i -g html-inject-meta 
 ```
 
 ## Usage
 
-`metadataify` is designed to just work without much configuration, but allows overrides when necessary. The input _must_ be valid html containing `head` and `title` tags. Insertion of the `meta` tags is _not_ idempotent. Used without any arguments, the command line version looks for the nearest `package.json`. For example:
+`html-inject-meta` is designed to just work without much configuration, but allows overrides when necessary. The input _must_ be valid html containing `head` and `title` tags. Insertion of the `meta` tags is _not_ idempotent. Used without any arguments, the command line version looks for the nearest `package.json`. For example:
 
 ```bash
-$ metadataify < input.html
+$ htmlinjectmeta < input.html
 ```
 
 Given `package.json`:
 
 ```json
 {
-  "name": "metadataify",
+  "name": "html-inject-meta",
   "description": "Stream meta tags into html",
   "author": "Ricky Reusser"
 }
@@ -57,16 +57,16 @@ it produces the output:
 <!doctype html>
 <html>
   <head>
-    <title>metadataify</title>
-    <meta name="application-name" content="metadataify">
+    <title>html-inject-meta</title>
+    <meta name="application-name" content="html-inject-meta">
     <meta name="subject" content="Stream meta tags into html">
     <meta name="abstract" content="Stream meta tags into html">
-    <meta name="twitter:title" content="metadataify">
+    <meta name="twitter:title" content="html-inject-meta">
     <meta name="description" content="Stream meta tags into html">
     <meta name="twitter:description" content="Stream meta tags into html">
     <meta name="author" content="Ricky Reusser">
     <meta name="twitter:creator" content="Ricky Reusser">
-    <meta property="og:title" content="metadataify">
+    <meta property="og:title" content="html-inject-meta">
     <meta property="og:description" content="Stream meta tags into html">
     <meta property="article:author" content="Ricky Reusser">
   </head>
@@ -75,19 +75,19 @@ it produces the output:
 </html>
 ```
 
-If you don't want to pollute your `package.json` with metadata for sharing, you can override the defaults by adding a `metadataify` field to your `package.json`, e.g:
+If you don't want to pollute your `package.json` with metadata for sharing, you can override the defaults by adding a `html-inject-meta` field to your `package.json`, e.g:
 
 ```json
 {
-  "name": "metadataify",
+  "name": "html-inject-meta",
   "description": "My npm package description",
   "author": "Ricky Reusser",
-  "metadataify": {
-    "name": "My metadataify demo",
+  "html-inject-meta": {
+    "name": "My html-inject-meta demo",
     "description": "Here's a neat demo",
-    "url": "http://metadataify.github.io",
+    "url": "http://html-inject-meta.github.io",
     "author": "Ricky Reusser",
-    "image": "http://rawgit.com/rreusser/metadataify/master/images/screenshot.png"
+    "image": "http://rawgit.com/rreusser/html-inject-meta/master/images/screenshot.png"
   }
 }
 ```
@@ -95,28 +95,28 @@ If you don't want to pollute your `package.json` with metadata for sharing, you 
 Even better, use it with [indexhtmlify](https://github.com/dominictarr/indexhtmlify):
 
 ```bash
-$ browserify index.js | indexhtmlify | metadataify > index.html
+$ browserify index.js | indexhtmlify | htmlinjectmeta > index.html
 ```
 
 To override the nearest `package.json` with your own input JSON:
 
 ```bash
-$ metadataify --input=mydata.json < input.html
+$ htmlinjectmeta --input=mydata.json < input.html
 ```
 
 You can disable json input with `--no-input` and instead specify fields on the command line:
 
 ```bash
-$ metadataify --no-input --title="My page!" --description="A description..." --author="My Name" < input.html
+$ htmlinjectmeta --no-input --title="My page!" --description="A description..." --author="My Name" < input.html
 ```
 
 If you need further customization or more specificity, look in the code to see the precise logic. PRs with improvements are welcome!
 
 ## API
 
-#### `require('metadataify')([data])`
+#### `require('html-inject-meta')([data])`
 
-Returns a transform stream that applies to a stream of html the changes specified in `data`. The format of `data` identically matches the format of `package.json` that is read by the command line version, including the optional `metadataify` field.
+Returns a transform stream that applies to a stream of html the changes specified in `data`. The format of `data` identically matches the format of `package.json` that is read by the command line version, including the optional `html-inject-meta` field.
 
 ## See also
 
@@ -128,14 +128,14 @@ This module is heaviliy inspired by and works great with [indexhtmlify](https://
 
 <!-- BADGES -->
 
-[travis-image]: https://travis-ci.org/rreusser/metadataify.svg?branch=master
-[travis-url]: https://travis-ci.org/rreusser/metadataify
+[travis-image]: https://travis-ci.org/rreusser/html-inject-meta.svg?branch=master
+[travis-url]: https://travis-ci.org/rreusser/html-inject-meta
 
-[npm-image]: https://badge.fury.io/js/metadataify.svg
-[npm-url]: https://npmjs.org/package/metadataify
+[npm-image]: https://badge.fury.io/js/html-inject-meta.svg
+[npm-url]: https://npmjs.org/package/html-inject-meta
 
-[david-dm-image]: https://david-dm.org/rreusser/metadataify.svg?theme=shields.io
-[david-dm-url]: https://david-dm.org/rreusser/metadataify
+[david-dm-image]: https://david-dm.org/rreusser/html-inject-meta.svg?theme=shields.io
+[david-dm-url]: https://david-dm.org/rreusser/html-inject-meta
 
 [semistandard-image]: https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square
 [semistandard-url]: https://github.com/Flet/semistandard

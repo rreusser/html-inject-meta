@@ -2,7 +2,7 @@
 
 'use strict';
 
-var metadataify = require('./metadataify');
+var htmlInjectMeta = require('./');
 var minimist = require('minimist');
 var pkgUp = require('pkg-up');
 var fs = require('fs');
@@ -14,18 +14,19 @@ if (process.stdin.isTTY) {
 var opts = minimist(process.argv.slice(2));
 
 function printUsageAndExit () {
-  console.error('USAGE: browserify client.js |indexhtmlify | metadataify > index.html');
+  console.error('USAGE: browserify client.js |indexhtmlify | htmlinjectmeta > index.html');
   process.exit(1);
 }
 
 function execute (data) {
   process.stdin
-    .pipe(metadataify(data))
+    .pipe(htmlInjectMeta(data))
     .pipe(process.stdout);
 }
 
 function applyOverrides (data, opts) {
-  data.metadataify = data.metadataify || {};
+  // Add metadataify fallback for backward-sorta-compatibility
+  data['html-inject-meta'] = data['html-inject-meta'] || data['metadataify'] || {};
 
   function setField (inField, outField) {
     if (!outField) {
@@ -38,7 +39,7 @@ function applyOverrides (data, opts) {
       return;
     }
 
-    data.metadataify[outField] = value;
+    data['html-inject-meta'][outField] = value;
   }
 
   setField('description');

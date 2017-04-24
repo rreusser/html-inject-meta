@@ -1,9 +1,11 @@
 {
-  "name": "metadataify",
+  "name": "html-inject-meta",
   "version": "2.0.0",
   "description": "Stream meta tags into html",
-  "main": "metadataify.js",
-  "bin": "cli.js",
+  "main": "index.js",
+  "bin": {
+    "htmlinjectmeta": "cli.js"
+  },
   "author": {
     "name": "Ricky Reusser",
     "email": "rsreusser@gmail.com"
@@ -17,10 +19,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/rreusser/metadataify.git"
+    "url": "git://github.com/rreusser/html-inject-meta.git"
   },
   "bugs": {
-    "url": "https://github.com/rreusser/metadataify/issues",
+    "url": "https://github.com/rreusser/html-inject-meta/issues",
     "email": "rsreusser@gmail.com"
   },
   "scripts": {
@@ -47,8 +49,8 @@
       "beforeEach"
     ]
   },
-  "metadataify": {
-    "url": "http://github.com/rreusser/metadataify",
+  "html-inject-meta": {
+    "url": "http://github.com/rreusser/html-inject-meta",
     "image": "http://example.com/example.gif",
     "twitter": {
       "title": "Title for Twitter",

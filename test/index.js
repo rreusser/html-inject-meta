@@ -1,6 +1,6 @@
 'use strict';
 
-var metadataify = require('../metadataify');
+var htmlInjectMeta = require('../');
 var assert = require('chai').assert;
 var toString = require('stream-to-string');
 var fs = require('fs');
@@ -21,12 +21,12 @@ function assertStreamsEqual (computedStream, expectedStream) {
 
 function compare (inFixture, outFixture, changes) {
   return assertStreamsEqual(
-    fixture(inFixture).pipe(metadataify(changes)),
+    fixture(inFixture).pipe(htmlInjectMeta(changes)),
     fixture(outFixture)
   );
 }
 
-describe('metadataify', function () {
+describe('htmlInjectMeta', function () {
   it('makes no changes when passed undefined', function (done) {
     compare('input/test.html', 'input/test.html', undefined).then(done, done);
   });
@@ -71,10 +71,10 @@ describe('metadataify', function () {
     }).then(done, done);
   });
 
-  describe('passing data through metadataify field', function () {
+  describe('passing data through htmlInjectMeta field', function () {
     it('inserts a title', function (done) {
       compare('input/test.html', 'output/insert-title.html', {
-        metadataify: {
+        'html-inject-meta': {
           name: 'test title'
         }
       }).then(done, done);
@@ -82,7 +82,7 @@ describe('metadataify', function () {
 
     it('inserts a description', function (done) {
       compare('input/test.html', 'output/insert-description.html', {
-        metadataify: {
+        'html-inject-meta': {
           description: 'test description'
         }
       }).then(done, done);
@@ -90,7 +90,7 @@ describe('metadataify', function () {
 
     it('inserts an author', function (done) {
       compare('input/test.html', 'output/insert-author.html', {
-        metadataify: {
+        'html-inject-meta': {
           author: 'test author'
         }
       }).then(done, done);
@@ -98,7 +98,7 @@ describe('metadataify', function () {
 
     it('inserts an author with nested npm-style definition', function (done) {
       compare('input/test.html', 'output/insert-author.html', {
-        metadataify: {
+        'html-inject-meta': {
           author: {
             name: 'test author'
           }
@@ -108,7 +108,7 @@ describe('metadataify', function () {
 
     it('inserts a url', function (done) {
       compare('input/test.html', 'output/insert-url.html', {
-        metadataify: {
+        'html-inject-meta': {
           url: 'test url'
         }
       }).then(done, done);
@@ -116,7 +116,7 @@ describe('metadataify', function () {
 
     it('inserts an image', function (done) {
       compare('input/test.html', 'output/insert-image.html', {
-        metadataify: {
+        'html-inject-meta': {
           image: 'test image'
         }
       }).then(done, done);
@@ -124,13 +124,13 @@ describe('metadataify', function () {
 
     it('allows specification of a canonical url', function (done) {
       compare('input/test.html', 'output/insert-canonical.html', {
-        metadataify: {canonicalUrl: 'test canonical'}
+        'html-inject-meta': {canonicalUrl: 'test canonical'}
       }).then(done, done);
     });
 
     it('accepts twitter fields', function (done) {
       compare('input/test.html', 'output/insert-twitter.html', {
-        metadataify: {
+        'html-inject-meta': {
           twitter: {
             card: 'twitter-card',
             site: 'twitter-site',
