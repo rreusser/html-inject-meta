@@ -4,7 +4,7 @@
   "description": "Stream meta tags into html",
   "main": "index.js",
   "bin": {
-    "htmlinjectmeta": "cli.js"
+    "html-inject-meta": "cli.js"
   },
   "author": {
     "name": "Ricky Reusser",

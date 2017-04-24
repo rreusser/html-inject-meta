@@ -23,7 +23,7 @@ $ npm i html-inject-meta
 `html-inject-meta` is designed to just work without much configuration, but allows overrides when necessary. The input _must_ be valid html containing `head` and `title` tags. Insertion of the `meta` tags is _not_ idempotent. Used without any arguments, the command line version looks for the nearest `package.json`. For example:
 
 ```bash
-$ htmlinjectmeta < input.html
+$ html-inject-meta < input.html
 ```
 
 Given `package.json`:
@@ -93,19 +93,19 @@ If you don't want to pollute your `package.json` with metadata for sharing, you 
 Even better, use it with [indexhtmlify](https://github.com/dominictarr/indexhtmlify):
 
 ```bash
-$ browserify index.js | indexhtmlify | htmlinjectmeta > index.html
+$ browserify index.js | indexhtmlify | html-inject-meta > index.html
 ```
 
 To override the nearest `package.json` with your own input JSON:
 
 ```bash
-$ htmlinjectmeta --input=mydata.json < input.html
+$ html-inject-meta --input=mydata.json < input.html
 ```
 
 You can disable json input with `--no-input` and instead specify fields on the command line:
 
 ```bash
-$ htmlinjectmeta --no-input --title="My page!" --description="A description..." --author="My Name" < input.html
+$ html-inject-meta --no-input --title="My page!" --description="A description..." --author="My Name" < input.html
 ```
 
 If you need further customization or more specificity, look in the code to see the precise logic. PRs with improvements are welcome!
